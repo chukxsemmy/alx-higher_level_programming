@@ -39,7 +39,7 @@ listint_t *insert_node(listint_t **head, int number)
 		thisNode->next = newNode;
 		return (newNode);
 	}
-	thisNode = thisNode->next;
+	nextOp = thisNode->next;
 
 	while (thisNode)
 	{
