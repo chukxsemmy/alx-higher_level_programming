@@ -45,13 +45,13 @@ listint_t *insert_node(listint_t **head, int number)
 	{
 		if (!nextOp)
 			thisNode->next = newNode, flag = 1;
-		else if (NextOp->n == number)
+		else if (nextOp->n == number)
 			thisNode->next = newNode, newNode->next = nextOp, flag = 1;
 		else if (nextOp->n > number && thisNode->n < number)
 			thisNode->next = newNode, newNode->next = nextOp, flag = 1;
 		if (flag)
 			break;
-		NextOp = nextOp->next, thisNode = thisNode->next;
+		nextOp = nextOp->next, thisNode = thisNode->next;
 	}
 	return (newNode);
 }
