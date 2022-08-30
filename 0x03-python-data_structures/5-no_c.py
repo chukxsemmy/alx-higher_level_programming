@@ -7,7 +7,7 @@ def no_c(my_string):
     expd_string = my_string[:]
 
     for i in range(length):
-        if (expd_string[i] == 'c' or my_string[i] == 'C'):
+        if (my_string[i] == 'c' or my_string[i] == 'C'):
             expd_string = expd_string[:(i - j)] + my_string[(i + 1):]
             j += 1
 
