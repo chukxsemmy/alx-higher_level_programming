@@ -2,48 +2,51 @@
 
 /**
  * reverse - reverses the second half of the list
+ *
  * @h_r: head of the second half
  * Return: no return
  */
-
 void reverse(listint_t **h_r)
 {
-    listint_t *previous;
-    listint_t *current;
-    listint_t *next;
+    listint_t *prv;
+    listint_t *crr;
+    listint_t *nxt;
 
-    previous = NULL;
-    current = *now;
+    prv = NULL;
+    crr = *h_r;
 
-    while (current != NULL)
+    while (crr != NULL)
     {
-        next = current->next;
-        current->next = previous;
-        previous = current;
-        current = next;
+        nxt = crr->next;
+        crr->next = prv;
+        prv = crr;
+        crr = nxt;
     }
 
-    *now = pervious;
+    *h_r = prv;
 }
 
 /**
  * compare - compares each int of the list
+ *
  * @h1: head of the first half
  * @h2: head of the second half
  * Return: 1 if are equals, 0 if not
  */
-
 int compare(listint_t *h1, listint_t *h2)
 {
-    listint_t *h1;
-    listint_t *h2;
+    listint_t *tmp1;
+    listint_t *tmp2;
 
-    while (h1 != NULL && h2 != NULL)
+    tmp1 = h1;
+    tmp2 = h2;
+
+    while (tmp1 != NULL && tmp2 != NULL)
     {
-        if (h1->n == h2->n)
+        if (tmp1->n == tmp2->n)
         {
-            h1 = h1->next;
-            h2 = h2->next;
+            tmp1 = tmp1->next;
+            tmp2 = tmp2->next;
         }
         else
         {
@@ -51,7 +54,7 @@ int compare(listint_t *h1, listint_t *h2)
         }
     }
 
-    if (h1 == NULL && h2 == NULL)
+    if (tmp1 == NULL && tmp2 == NULL)
     {
         return (1);
     }
