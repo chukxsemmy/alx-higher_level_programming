@@ -1,18 +1,40 @@
 #!/usr/bin/python3
+def to_subtract(list_num):
+    to_int = 0
+    curr = max(list_num)
+
+    for n in list_num:
+        if curr > n:
+            to_int += n
+
+    return (curr - to_int)
+
+
 def roman_to_int(roman_string):
-    roman_symbol = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
-    if (roman_string is None) or (type(roman_string) is not str):
+    if not roman_string:
         return 0
 
-    num = len(roman_string)
-    to_int = roman_symbol[roman_string[num-1]]
-    for i in range(num - 1, 0, -1):
-        insrt_roman_value = roman_symbol[roman_string[i]]
-        real_roman_value = roman_symbol[roman_string[i-1]]
+    if not isinstance(roman_string, str):
+        return 0
 
-        if real_roman_value >= insrt_roman_value:
-            to_int += real_roman_value
-        else:
-            to_int -= real_roman_value
+    roman_symbol = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    list_keys = list(roman_symbol.keys())
 
-    return to_int
+    num = 0
+    prev = 0
+    list_num = [0]
+
+    for ch in roman_string:
+        for r_num in list_keys:
+            if r_num == ch:
+                if roman_symbol.get(ch) <= prev:
+                    num += to_subtract(list_num)
+                    list_num = [roman_symbol.get(ch)]
+                else:
+                    list_num.append(roman_symbol.get(ch))
+
+                prev = romand_symbol.get(ch)
+
+    num += to_subtract(list_num)
+
+    return (num)
