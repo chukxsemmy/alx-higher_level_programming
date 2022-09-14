@@ -1,14 +1,17 @@
 #!/usr/bin/python3
-""" a class module in python """
+"""
+A module that contains a Class
+"""
 
 
-class Square():
-    """Class square"""
+class Square:
+    """an class with size attributes"""
 
     def __init__(self, size):
-        """ class initializaton"""
-
-        """Args: 
-        size (int): size of the square
+        """initialises size to a private attr
+        Args:
+            size: size of Square
+        Return:
+            Nothing
         """
         self.__size = size
