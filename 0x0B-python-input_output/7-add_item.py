@@ -2,6 +2,7 @@
 
 """Adds arguments to a Python list and save to file."""
 import sys
+import json
 
 if __name__ == "__main__":
     save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
