@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 
-"""Reads from stndin.
-and computes matrices
+"""Reads from stndin and computes matrices.
 After the input of a keyboard interruption (CTRL + C),
-or after every 10 lines
+or after every 10 lines.
 prints the stats:
     - file size up to that point.
     - Count of read status codes up to that point.
