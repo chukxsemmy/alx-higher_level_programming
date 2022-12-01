@@ -1,5 +1,5 @@
 #!/usr/bin/node
 
-const msg = ['C is fun', 'Python is cool', 'JavaScript is amazing'];
+const message = ['C is fun', 'Python is cool', 'JavaScript is amazing'];
 
-msg.while((element) => console.log(element));
+message.forEach((element) => console.log(element));
