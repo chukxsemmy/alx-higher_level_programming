@@ -1,31 +1,24 @@
 #!/usr/bin/python3
-"""
- lists all State objects, and corresponding City
- objects, contained in the database hbtn_0e_101_usa
-"""
+""" Script that lists all State objects, and corresponding
+    City objects, contained in the database hbtn_0e_101_usa """
 
-from model_state import State, Base
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-import sys
+if __name__ == "__main__":
 
+    import sys
+    from relationship_city import Base, City
+    from relationship_state import State
+    from sqlalchemy.schema import Table
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import Session
 
-if __name__ == '__main__':
-    username = sys.argv[1]
-    password = sys.argv[2]
-    db_name = sys.argv[3]
-    host = 'localhost'
-    port = '3306'
-
-    engine = create_engine('mysql+mysqldb://{}:{}@{}:{}/{}'.format(
-                           username, password, host, port, db_name),
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format
+                           (sys.argv[1], sys.argv[2], sys.argv[3]),
                            pool_pre_ping=True)
-    Session = sessionmaker(bind=engine)
-    local_session = Session()
-    new_state = State(name='Louisiana')
-    local_session.add(new_state)
-    local_session.commit()
+    Base.metadata.create_all(engine)
 
-    print(new_state.id)
-    local_session.close()
-    engine.dispose()
+    s = Session(engine)
+    for state in s.query(State).order_by(State.id).all():
+        print("{}: {}".format(state.id, state.name))
+        for city in state.cities:
+            print("    {}: {}".format(city.id, city.name))
+    s.close()
