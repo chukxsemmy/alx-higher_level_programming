@@ -1,4 +1,4 @@
-vi #!/usr/bin/python3
+#!/usr/bin/python3
 """ inherits from Base (imported from model_state)
     links to the MySQL table cities
     class attribute id that represents a column of
