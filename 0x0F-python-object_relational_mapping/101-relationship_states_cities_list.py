@@ -4,24 +4,28 @@
  objects, contained in the database hbtn_0e_101_usa
 """
 
-import sys
-from unicodedata import name
-from venv import create
-from sqlalchemy import create_engine, true
+from model_state import State, Base
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from relationship_state import State
-from relationship_city import Base, City
+import sys
 
-if __name__ == "__main__":
-    engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}".format(
-        sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
-    Base.metadata.create_all(engine)
-    session_maker = sessionmaker(bind=engine)
-    session = session_maker()
 
-    for state in session.query(State).order_by(State.id).all():
-        print("{}: {}".format(state.id, state.name))
-        for city in state.cities:
-            print("\t{}: {}".format(city.id, city.name))
-    session.close()
+if __name__ == '__main__':
+    username = sys.argv[1]
+    password = sys.argv[2]
+    db_name = sys.argv[3]
+    host = 'localhost'
+    port = '3306'
+
+    engine = create_engine('mysql+mysqldb://{}:{}@{}:{}/{}'.format(
+                           username, password, host, port, db_name),
+                           pool_pre_ping=True)
+    Session = sessionmaker(bind=engine)
+    local_session = Session()
+    new_state = State(name='Louisiana')
+    local_session.add(new_state)
+    local_session.commit()
+
+    print(new_state.id)
+    local_session.close()
     engine.dispose()
